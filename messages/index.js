@@ -35,7 +35,7 @@ bot.dialog('/', function (session) {
     var queuedMessage = { address: session.message.address, text: session.message.text };
     // add message to queue
     session.sendTyping();
-    context.bindings.outToIgor = queuedMessage;
+    //context.bindings.outToIgor = queuedMessage;
     session.send('Your message (\'' + session.message.text + '\') has been added to a queue, and it will be sent back to you via a Function');
 });
 
