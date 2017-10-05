@@ -38,9 +38,9 @@ bot.dialog('/', function (session) {
     var sbService = azure.createServiceBusService(process.env['wrdsb-igor_SERVICEBUS']);
     sbService.sendQueueMessage('bot_receive', queuedMessage, function (err) {
         if (err) {
-            context.log('Failed Tx: ', err);
+            console.log('Failed Tx: ', err);
         } else {
-            context.log('Sent ' + queuedMessage);
+            console.log('Sent ' + queuedMessage);
         }
     });
     session.send('Your message (\'' + session.message.text + '\') has been added to a queue, and it will be sent back to you via a Function');
