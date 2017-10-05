@@ -8,14 +8,6 @@
       "name": "req"
     },
     {
-      "name" : "outToIgor",
-      "type" : "serviceBus",
-      "queueName" : "bot_receive",
-      "connection" : "wrdsb-igor_SERVICEBUS",
-      "accessRights" : "manage",
-      "direction" : "out"
-    },
-    {
       "type": "http",
       "direction": "out",
       "name": "res"

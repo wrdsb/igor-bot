@@ -5,7 +5,7 @@ https://aka.ms/abs-node-proactive
 "use strict";
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
-var azure = require('azure-storage');
+var azure = require('azure-sb');
 var path = require('path');
 
 var useEmulator = (process.env.NODE_ENV == 'development');
@@ -35,7 +35,14 @@ bot.dialog('/', function (session) {
     var queuedMessage = { address: session.message.address, text: session.message.text };
     // add message to queue
     session.sendTyping();
-    //context.bindings.outToIgor = queuedMessage;
+    var sbService = azure.createServiceBusService(process.env['wrdsb-igor_SERVICEBUS']);
+    sbService.sendQueueMessage('bot_receive', queuedMessage, function (err) {
+        if (err) {
+            context.log('Failed Tx: ', err);
+        } else {
+            context.log('Sent ' + queuedMessage);
+        }
+    });
     session.send('Your message (\'' + session.message.text + '\') has been added to a queue, and it will be sent back to you via a Function');
 });
 
