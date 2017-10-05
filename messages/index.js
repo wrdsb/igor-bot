@@ -36,7 +36,7 @@ bot.dialog('/', function (session) {
     // add message to queue
     session.sendTyping();
     var sbService = azure.createServiceBusService(process.env['wrdsb-igor_SERVICEBUS']);
-    sbService.sendQueueMessage('bot_receive', queuedMessage, function (err) {
+    sbService.sendQueueMessage('bot_receive', JSON.stringify(queuedMessage), function (err) {
         if (err) {
             console.log('Failed Tx: ', err);
         } else {
